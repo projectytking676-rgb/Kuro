@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}Online Controls · KURO{% endblock %}{% block content %}
+<div class="page-head"><div><div class="eyebrow">REMOTE APP SETTINGS</div><h1>Online <em>Controls</em></h1><p class="muted">Changes are returned by the public app configuration API.</p></div></div>
+<form method="post" class="panel settings-form"><input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+<label class="switch-row"><span><b>Online update</b><small>Allow the app to check for a newer version.</small></span><input type="checkbox" name="online_update" {% if online_update=='1' %}checked{% endif %}><i></i></label>
+<label class="switch-row"><span><b>Maintenance mode</b><small>Temporarily reject license verification requests.</small></span><input type="checkbox" name="maintenance" {% if maintenance=='1' %}checked{% endif %}><i></i></label>
+<label>LATEST VERSION</label><input name="latest_version" value="{{ latest_version }}" required>
+<label>UPDATE DOWNLOAD URL <small>(HTTPS only)</small></label><input name="update_url" value="{{ update_url }}" placeholder="https://example.com/app.apk">
+<label>UPDATE MESSAGE</label><input name="update_message" value="{{ update_message }}">
+<button class="primary">SAVE SETTINGS</button></form>
+<div class="panel"><h2>Public API endpoints</h2><p><code>GET /api/v1/config</code> — online switches and app settings</p><p><code>GET /api/v1/update?version=1.0.0</code> — update check</p><p><code>POST /api/v1/verify</code> — key + device verification</p></div>{% endblock %}

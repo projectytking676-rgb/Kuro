@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block title %}Admin Login · KURO{% endblock %}{% block content %}
+<section class="login-wrap"><div class="eyebrow">PRIVATE ADMIN ACCESS</div><h1>Welcome to <em>KURO.</em></h1><p class="muted">Sign in to manage licenses, devices and online updates.</p>
+<form method="post" class="panel login-form"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><label>USERNAME</label><input name="username" autocomplete="username" required><label>PASSWORD</label><input type="password" name="password" autocomplete="current-password" required><button class="primary full">SIGN IN <span>→</span></button></form>
+<p class="tiny">Admin accounts are created by the server owner using create_admin.py.</p></section>{% endblock %}

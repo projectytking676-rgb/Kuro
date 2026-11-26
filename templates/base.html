@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}KURO PANEL{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"></head>
+<body><div class="shell">
+<header class="top"><a class="brand" href="{{ url_for('dashboard') }}"><span class="mark">K</span><span>KURO <b>PANEL</b><small>CONTROL CENTER</small></span></a>
+{% if session.get('admin_id') %}<form method="post" action="{{ url_for('logout') }}"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><button class="ghost">LOG OUT</button></form>{% endif %}</header>
+{% with messages=get_flashed_messages(with_categories=true) %}{% if messages %}<div class="alerts">{% for category,message in messages %}<div class="alert {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}{% endwith %}
+{% if session.get('admin_id') %}<nav><a href="{{ url_for('dashboard') }}">Overview</a><a href="{{ url_for('keys') }}">Key Manager</a><a href="{{ url_for('settings') }}">Online Controls</a></nav>{% endif %}
+<main>{% block content %}{% endblock %}</main><footer>KURO PANEL <span>•</span> Secure License Management</footer></div></body></html>
